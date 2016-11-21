@@ -19,8 +19,46 @@
 
     </nav>
     <div class="container">
+      <div ng-controller="ContactsListController as ctrl">
+        <h1>{{::ctrl.title}}</h1>
 
-      <h1>Hello {{1+1}}</h1>
+        <div class="row">
+        <form class="col s12" novalidate name="addForm" ng-submit="ctrl.addContact(newContact)">
+          <div class="row">
+            <div class="input-field col s6">
+              <input type="text" id="name" required ng-model="newContact.name"/>
+              <label for="name">Name</label>
+            </div>
+            <div class="input-field col s6">
+              <input type="text" id="username" required ng-model="newContact.username"/>
+              <label for="name">Username</label>
+            </div>
+          </div>
+            <div class="row">
+            <div class="input-field col s12">
+              <input type="email" id="email" required ng-model="newContact.email"/>
+              <label for="name"></span>Email</label>
+            </div>
+          </div>
+          <div class="row">
+            <button type="submit" class="btn" ng-disabled="addForm.$invalid">Add Contact</button>
+          </div>
+
+        </form>
+        </div>
+
+
+
+
+        <button class="btn" ng-click="ctrl.toggleList()" ng-class="{red: ctrl.showList}">Toggle list</button>
+        <ul class="collection" ng-show="ctrl.showList">
+          <li class="collection-item" ng-repeat="person in ctrl.contacts">
+            <span class="title">{{person.name}}</span>
+            <p>{{person.username}}</p><br/><p>{{person.email}}</p>
+          </li>
+        </ul>
+      </div>
+
     </div>
   </body>
 </html>
